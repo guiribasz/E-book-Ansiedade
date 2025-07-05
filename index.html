@@ -63,7 +63,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('https://raw.githubusercontent.com/guiribasz/E-book-Ansiedade/refs/heads/main/ilustra%C3%A7ao%20do%20ebook.png') center/cover;
+            background: url('https://raw.githubusercontent.com/guiribasz/E-book-Ansiedade/refs/heads/main/capa%20do%20livro%20sem%20fundo.png') center/cover;
             opacity: 0.2;
             z-index: 0;
         }
@@ -301,6 +301,7 @@
             object-fit: cover;
             border: 5px solid var(--primary);
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            object-position: top;
         }
         
         .author-text {
@@ -352,6 +353,21 @@
             align-items: center;
             justify-content: center;
             border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .bonus-image img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        /* Countdown */
+        .countdown {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #e74c3c;
+            margin: 15px 0;
+            animation: pulse 1s infinite alternate;
         }
         
         /* CTA */
@@ -372,11 +388,16 @@
             margin: 20px auto;
             max-width: 300px;
             height: 300px;
-            background-color: #f5f5f5;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .product-image img {
+            max-width: 100%;
+            height: auto;
         }
         
         .price {
@@ -390,6 +411,7 @@
             font-size: 1.2rem;
             margin-bottom: 30px;
             opacity: 0.9;
+            animation: fadeIn 2s infinite alternate;
         }
         
         .guarantee-badge {
@@ -488,6 +510,12 @@
             100% { transform: scale(1); }
         }
         
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        
         /* Responsive adjustments */
         @media (max-width: 768px) {
             h1 {
@@ -514,7 +542,7 @@
                     <a href="#oferta" class="btn">Quero mudar agora!</a>
                 </div>
                 <div class="header-image">
-                    <img src="https://raw.githubusercontent.com/guiribasz/E-book-Ansiedade/refs/heads/main/ilustra%C3%A7ao%20do%20ebook.png" alt="E-book Desperte Seu Potencial">
+                    <img src="https://raw.githubusercontent.com/guiribasz/E-book-Ansiedade/refs/heads/main/capa%20do%20livro%20sem%20fundo.png" alt="E-book Desperte Seu Potencial">
                 </div>
             </div>
         </div>
@@ -627,7 +655,7 @@
             <h2 class="section-title">Quem Escreveu Este E-book</h2>
             <div class="author">
                 <div class="author-image">
-                    <img src="https://via.placeholder.com/400x400/2F80ED/FFFFFF?text=Autor" alt="Autor do E-book">
+                    <img src="https://raw.githubusercontent.com/guiribasz/E-book-Ansiedade/refs/heads/main/Autor%20do%20livro.png" alt="Autor do E-book">
                 </div>
                 <div class="author-text">
                     <p>Oi, eu sou o Marcelo! Assim como você, já me senti completamente perdido e desmotivado, preso em empregos que não me realizavam e adiando meus sonhos por medo de falhar.</p>
@@ -642,15 +670,14 @@
     <section>
         <div class="container">
             <h2 class="section-title">Bônus Exclusivos</h2>
-            <p>Para te ajudar a colocar em prática tudo o que vai aprender, você receberá esse presente especial:</p>
             <div class="bonuses">
                 <div class="bonus">
-                    <h3>Kit Completo de Ferramentas Práticas</h3>
+                    <h3>Mente Blindada</h3>
                     <div class="bonus-image">
-                        <!-- Espaço para adicionar imagem depois -->
-                        [IMAGEM DO BÔNUS]
+                        <img src="https://raw.githubusercontent.com/guiribasz/E-book-Ansiedade/refs/heads/main/oferta%20do%20produto.png" alt="Bônus Mente Blindada">
                     </div>
-                    <p>Um pacote completo com checklist de hábitos, planner semanal e guia contra procrastinação para aplicar imediatamente o que aprender no e-book.</p>
+                    <p>Na compra do e-book "Desperte Seu Potencial", você leva <strong>GRÁTIS</strong> o e-book "Mente Blindada" como bônus especial!</p>
+                    <div class="countdown">Oferta válida por: <span id="countdown">24:59:59</span></div>
                     <p class="bonus-value">Valor: R$ 59,90</p>
                 </div>
             </div>
@@ -664,12 +691,11 @@
             <p>Imagine daqui a 3 meses: você poderia estar exatamente onde está agora... ou poderia estar vivendo uma versão melhor da sua vida.</p>
             
             <div class="product-image">
-                <!-- Espaço para adicionar imagem do produto depois -->
-                [IMAGEM DO PRODUTO]
+                <img src="https://raw.githubusercontent.com/guiribasz/E-book-Ansiedade/refs/heads/main/demonstra%C3%A7ao%20de%20vendas%20do%20produto.png" alt="Demonstração do Produto">
             </div>
             
             <div class="price">R$ 39,90</div>
-            <div class="installments">ou 6x de R$ 6,90 no cartão</div>
+            <div class="installments">6x de 6,90R$ ou 39,90 à vista</div>
             
             <div class="guarantee-badge">Garantia de 7 Dias - Sem Risco!</div>
             <p>Se em 7 dias você achar que o conteúdo não foi útil para você, devolvemos cada centavo. Sem perguntas, sem burocracia.</p>
@@ -707,5 +733,26 @@
             <p>Pagamentos processados com segurança pela Hotmart</p>
         </div>
     </footer>
+
+    <script>
+        // Countdown timer
+        function updateCountdown() {
+            const now = new Date();
+            const endOfDay = new Date();
+            endOfDay.setHours(23, 59, 59, 0);
+            
+            const diff = endOfDay - now;
+            
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('countdown').textContent = 
+                `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+        
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
 </body>
 </html>
