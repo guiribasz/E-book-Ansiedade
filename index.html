@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desperte Seu Potencial - E-book de Desenvolvimento Pessoal</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap');
+        
+        :root {
+            --primary: #2F80ED;
+            --secondary: #F2994A;
+            --dark: #333333;
+            --light: #F2F2F2;
+            --success: #27AE60;
+            --white: #FFFFFF;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+            background-color: var(--light);
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), #56CCF2);
+            color: var(--white);
+            padding: 40px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://raw.githubusercontent.com/guiribasz/E-book-Ansiedade/refs/heads/main/ilustra%C3%A7ao%20do%20ebook.png') center/cover;
+            opacity: 0.2;
+            z-index: 0;
+        }
+        
+        header .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        @media (min-width: 768px) {
+            .header-content {
+                flex-direction: row;
+                justify-content: space-between;
+                text-align: left;
+            }
+        }
+        
+        .header-text {
+            flex: 1;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .header-image {
+            flex: 1;
+            text-align: center;
+            animation: fadeIn 1.5s ease;
+        }
+        
+        .header-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transform: perspective(1000px) rotateY(-10deg);
+            transition: transform 0.5s ease;
+        }
+        
+        .header-image img:hover {
+            transform: perspective(1000px) rotateY(0deg);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: var(--white);
+        }
+        
+        /* Main sections */
+        section {
+            padding: 60px 0;
+            background-color: var(--white);
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        section:nth-child(even) {
+            background-color: var(--light);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: var(--primary);
+            margin: 15px auto 0;
+        }
+        
+        /* Benefits */
+        .benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .benefit-item {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        section:nth-child(even) .benefit-item {
+            background: var(--light);
+        }
+        
+        .benefit-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .benefit-item h3 {
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+        
+        .benefit-item h3::before {
+            content: "✓";
+            color: var(--success);
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+        
+        /* Content */
+        .content-list {
+            counter-reset: content-counter;
+        }
+        
+        .content-item {
+            position: relative;
+            padding-left: 60px;
+            margin-bottom: 30px;
+            animation: fadeIn 0.5s ease;
+            animation-fill-mode: both;
+        }
+        
+        .content-item::before {
+            counter-increment: content-counter;
+            content: counter(content-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .testimonial {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            position: relative;
+        }
+        
+        section:nth-child(even) .testimonial {
+            background: var(--light);
+        }
+        
+        .testimonial::before {
+            content: """;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 4rem;
+            color: rgba(47, 128, 237, 0.1);
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-author {
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .testimonial-author span {
+            display: block;
+            font-weight: normal;
+            color: var(--dark);
+            font-size: 0.9rem;
+        }
+        
+        /* Author */
+        .author {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        @media (min-width: 768px) {
+            .author {
+                flex-direction: row;
+                text-align: left;
+            }
+        }
+        
+        .author-image {
+            flex: 0 0 200px;
+            margin-bottom: 20px;
+        }
+        
+        @media (min-width: 768px) {
+            .author-image {
+                margin-right: 40px;
+                margin-bottom: 0;
+            }
+        }
+        
+        .author-image img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--primary);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .author-text {
+            flex: 1;
+        }
+        
+        /* Bonuses */
+        .bonuses {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .bonus {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: 2px dashed var(--primary);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        section:nth-child(even) .bonus {
+            background: var(--light);
+        }
+        
+        .bonus:hover {
+            transform: scale(1.05);
+        }
+        
+        .bonus h3 {
+            color: var(--primary);
+        }
+        
+        .bonus-value {
+            font-weight: bold;
+            color: var(--secondary);
+            margin: 10px 0;
+        }
+        
+        .bonus-image {
+            margin: 15px 0;
+            height: 150px;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
+        }
+        
+        /* CTA */
+        .cta {
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary), #56CCF2);
+            color: var(--white);
+            padding: 60px 0;
+            border-radius: 10px;
+        }
+        
+        .cta h2 {
+            color: var(--white);
+            margin-bottom: 20px;
+        }
+        
+        .product-image {
+            margin: 20px auto;
+            max-width: 300px;
+            height: 300px;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+        }
+        
+        .price {
+            font-size: 3rem;
+            font-weight: bold;
+            margin: 20px 0;
+            animation: pulse 2s infinite;
+        }
+        
+        .installments {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .guarantee-badge {
+            display: inline-block;
+            background: var(--white);
+            color: var(--primary);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: bold;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        /* Order bumps */
+        .order-bumps {
+            display: none;
+        }
+        
+        /* Button */
+        .btn {
+            display: inline-block;
+            background: var(--secondary);
+            color: var(--white);
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-weight: bold;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            box-shadow: 0 5px 15px rgba(242, 153, 74, 0.4);
+        }
+        
+        .btn:hover {
+            background: #e68a3e;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(242, 153, 74, 0.6);
+        }
+        
+        .btn-large {
+            padding: 20px 60px;
+            font-size: 1.3rem;
+        }
+        
+        /* FAQ */
+        .faq-item {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 20px;
+        }
+        
+        .faq-question {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: var(--white);
+            padding: 30px 0;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        
+        footer a {
+            color: var(--secondary);
+            text-decoration: none;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            section {
+                padding: 40px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="header-text">
+                    <h1>Desperte Seu Potencial: A Virada de Chave Que Você Precisa Para Sair do Lugar</h1>
+                    <p class="subtitle">Descubra o método passo a passo para transformar sua vida, aumentar sua produtividade e conquistar a versão melhor de você mesmo</p>
+                    <a href="#oferta" class="btn">Quero mudar agora!</a>
+                </div>
+                <div class="header-image">
+                    <img src="https://raw.githubusercontent.com/guiribasz/E-book-Ansiedade/refs/heads/main/ilustra%C3%A7ao%20do%20ebook.png" alt="E-book Desperte Seu Potencial">
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <section>
+        <div class="container">
+            <h2 class="section-title">Chegou a Hora de Acordar Para a Vida!</h2>
+            <p>Se você está cansado de prometer mudanças que nunca acontecem, de adiar seus sonhos e sentir que está estagnado, esse e-book foi feito para você.</p>
+            <p>Eu sei exatamente como você se sente porque já estive aí - preso na zona de conforto, cheio de desculpas e sem coragem para tomar as rédeas da minha própria vida.</p>
+            <p>Mas tudo mudou quando descobri os princípios que compartilho neste guia. E agora quero te ajudar a dar esse passo também.</p>
+            <p><strong>Desperte Seu Potencial</strong> não é mais um e-book genérico de autoajuda. É um manual prático com estratégias reais que vão te ajudar a:</p>
+        </div>
+    </section>
+    
+    <section>
+        <div class="container">
+            <h2 class="section-title">O Que Você Vai Conquistar</h2>
+            <div class="benefits">
+                <div class="benefit-item">
+                    <h3>Quebrar o ciclo da procrastinação</h3>
+                    <p>Aprenda técnicas comprovadas para parar de adiar e começar a agir de verdade, mesmo quando a motivação estiver baixa.</p>
+                </div>
+                <div class="benefit-item">
+                    <h3>Desenvolver hábitos poderosos</h3>
+                    <p>Descubra como criar rotinas que transformam sua produtividade sem precisar de força de vontade sobre-humana.</p>
+                </div>
+                <div class="benefit-item">
+                    <h3>Superar a autossabotagem</h3>
+                    <p>Identifique os pensamentos que te mantêm preso e aprenda a reprogramar sua mente para o sucesso.</p>
+                </div>
+                <div class="benefit-item">
+                    <h3>Definir metas que funcionam</h3>
+                    <p>Vá além do "quero melhorar" e aprenda a traçar objetivos claros e alcançáveis em todas as áreas da vida.</p>
+                </div>
+                <div class="benefit-item">
+                    <h3>Gerenciar seu tempo como um expert</h3>
+                    <p>Técnicas simples para organizar seu dia e ter tempo para o que realmente importa.</p>
+                </div>
+                <div class="benefit-item">
+                    <h3>Recuperar sua confiança</h3>
+                    <p>Reconstrua sua autoestima e desenvolva a mentalidade de quem sabe que é capaz de conquistar o que quiser.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section>
+        <div class="container">
+            <h2 class="section-title">O Que Você Vai Encontrar No E-book</h2>
+            <div class="content-list">
+                <div class="content-item" style="animation-delay: 0.1s;">
+                    <h3>O Mito da Motivação</h3>
+                    <p>Porque esperar por inspiração é a maior armadilha e como agir mesmo quando não está com vontade.</p>
+                </div>
+                <div class="content-item" style="animation-delay: 0.2s;">
+                    <h3>Identificando Seus Bloqueios</h3>
+                    <p>Os 5 tipos de autossabotagem que mantêm você preso e como superar cada um deles.</p>
+                </div>
+                <div class="content-item" style="animation-delay: 0.3s;">
+                    <h3>O Poder dos Micro-Hábitos</h3>
+                    <p>Como mudanças pequenas e consistentes criam transformações radicais ao longo do tempo.</p>
+                </div>
+                <div class="content-item" style="animation-delay: 0.4s;">
+                    <h3>Planejamento Anti-Procrastinação</h3>
+                    <p>O método de 3 passos para planejar seu dia de forma que a ação se torne inevitável.</p>
+                </div>
+                <div class="content-item" style="animation-delay: 0.5s;">
+                    <h3>Gerenciamento de Energia</h3>
+                    <p>Descubra seus horários de pico e aprenda a trabalhar com seu ritmo natural, não contra ele.</p>
+                </div>
+                <div class="content-item" style="animation-delay: 0.6s;">
+                    <h3>O Círculo de Influência</h3>
+                    <p>Como focar no que você pode controlar e parar de desperdiçar energia com o que está fora do seu alcance.</p>
+                </div>
+                <div class="content-item" style="animation-delay: 0.7s;">
+                    <h3>Mindset de Crescimento</h3>
+                    <p>Transforme desafios em oportunidades e fracassos em degraus para o sucesso.</p>
+                </div>
+                <div class="content-item" style="animation-delay: 0.8s;">
+                    <h3>Plano de Ação Personalizado</h3>
+                    <p>Exercícios práticos para aplicar tudo o que aprendeu e criar seu roteiro de mudança.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section>
+        <div class="container">
+            <h2 class="section-title">Quem Já Leu, Recomenda!</h2>
+            <div class="testimonials">
+                <div class="testimonial">
+                    <p class="testimonial-text">"Depois de anos tentando me organizar e nunca conseguir, esse e-book me mostrou onde eu estava errando. Em 3 semanas já tinha criado hábitos que mudaram completamente minha produtividade no trabalho e em casa."</p>
+                    <p class="testimonial-author">Carolina S. <span>32 anos, São Paulo/SP</span></p>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-text">"Nunca imaginei que pequenas mudanças fizessem tanta diferença. O capítulo sobre micro-hábitos foi um divisor de águas pra mim. Finalmente consegui criar uma rotina de exercícios que mantive por mais de 6 meses!"</p>
+                    <p class="testimonial-author">Ricardo M. <span>28 anos, Belo Horizonte/MG</span></p>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-text">"Comprei sem muitas expectativas, mas foi a melhor decisão. Aprendi a parar de me sabotar e hoje estou me preparando para abrir meu próprio negócio, algo que antes só ficava no campo dos sonhos."</p>
+                    <p class="testimonial-author">Fernanda L. <span>41 anos, Porto Alegre/RS</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section>
+        <div class="container">
+            <h2 class="section-title">Quem Escreveu Este E-book</h2>
+            <div class="author">
+                <div class="author-image">
+                    <img src="https://via.placeholder.com/400x400/2F80ED/FFFFFF?text=Autor" alt="Autor do E-book">
+                </div>
+                <div class="author-text">
+                    <p>Oi, eu sou o Marcelo! Assim como você, já me senti completamente perdido e desmotivado, preso em empregos que não me realizavam e adiando meus sonhos por medo de falhar.</p>
+                    <p>Depois de anos estudando desenvolvimento pessoal e testando dezenas de métodos, descobri o que realmente funciona na prática - não apenas na teoria.</p>
+                    <p>Hoje, ajudo milhares de pessoas a saírem do ciclo da procrastinação através do meu trabalho como coach e mentor. E criei este e-book para levar esse conhecimento de forma acessível a quem precisa dar aquele empurrão para começar a mudar.</p>
+                    <p>Sei que você é capaz de muito mais do que imagina. E estou aqui para te ajudar a descobrir isso.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section>
+        <div class="container">
+            <h2 class="section-title">Bônus Exclusivos</h2>
+            <p>Para te ajudar a colocar em prática tudo o que vai aprender, você receberá esse presente especial:</p>
+            <div class="bonuses">
+                <div class="bonus">
+                    <h3>Kit Completo de Ferramentas Práticas</h3>
+                    <div class="bonus-image">
+                        <!-- Espaço para adicionar imagem depois -->
+                        [IMAGEM DO BÔNUS]
+                    </div>
+                    <p>Um pacote completo com checklist de hábitos, planner semanal e guia contra procrastinação para aplicar imediatamente o que aprender no e-book.</p>
+                    <p class="bonus-value">Valor: R$ 59,90</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="oferta" class="cta">
+        <div class="container">
+            <h2>Chegou a Hora da Decisão!</h2>
+            <p>Você pode continuar adiando sua mudança ou pode dar o primeiro passo hoje mesmo.</p>
+            <p>Imagine daqui a 3 meses: você poderia estar exatamente onde está agora... ou poderia estar vivendo uma versão melhor da sua vida.</p>
+            
+            <div class="product-image">
+                <!-- Espaço para adicionar imagem do produto depois -->
+                [IMAGEM DO PRODUTO]
+            </div>
+            
+            <div class="price">R$ 39,90</div>
+            <div class="installments">ou 6x de R$ 6,90 no cartão</div>
+            
+            <div class="guarantee-badge">Garantia de 7 Dias - Sem Risco!</div>
+            <p>Se em 7 dias você achar que o conteúdo não foi útil para você, devolvemos cada centavo. Sem perguntas, sem burocracia.</p>
+            <a href="#" class="btn btn-large">QUERO MUDAR AGORA!</a>
+        </div>
+    </section>
+    
+    <section>
+        <div class="container">
+            <h2 class="section-title">Perguntas Frequentes</h2>
+            <div class="faq-item">
+                <div class="faq-question">Como vou receber o e-book?</div>
+                <p>Assim que seu pagamento for confirmado, você receberá um e-mail com o link para baixar o e-book em PDF + todos os bônus. O material é digital, você pode acessar no celular, tablet ou computador.</p>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">E se eu não gostar do conteúdo?</div>
+                <p>Você tem 7 dias para testar sem risco. Se por qualquer motivo não achar que valeu a pena, é só mandar um e-mail que devolvemos seu dinheiro. Sem questionamentos, sem burocracia.</p>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Quanto tempo leva para ver resultados?</div>
+                <p>Algumas técnicas você pode aplicar imediatamente e já sentir diferença no mesmo dia. Outras levam algumas semanas de prática consistente. O importante é começar e manter a disciplina - e o e-book te ensina exatamente como fazer isso.</p>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Preciso de algum conhecimento prévio?</div>
+                <p>Não! O e-book foi escrito para ser acessível a qualquer pessoa, mesmo quem nunca leu nada sobre desenvolvimento pessoal. Tudo é explicado de forma clara e prática.</p>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>© 2023 Desperte Seu Potencial - Todos os direitos reservados</p>
+            <p>Este produto não garante a obtenção de resultados. Qualquer referência ao desempenho de uma estratégia não deve ser interpretada como uma garantia de resultados.</p>
+            <p><a href="#">Termos de Uso</a> | <a href="#">Política de Privacidade</a></p>
+            <p>Pagamentos processados com segurança pela Hotmart</p>
+        </div>
+    </footer>
+</body>
+</html>
